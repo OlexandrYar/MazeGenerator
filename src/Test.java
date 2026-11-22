@@ -1,3 +1,6 @@
+import CellGrid.Cell;
+import CellGrid.Grid;
+
 public class Test {
     public static void main(String[] args){
         Grid testGrid = new Grid(10,10);

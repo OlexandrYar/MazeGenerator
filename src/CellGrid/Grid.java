@@ -1,3 +1,5 @@
+package CellGrid;
+
 public class Grid {
     int columns;
     int rows;

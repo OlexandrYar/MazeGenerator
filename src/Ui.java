@@ -1,6 +1,8 @@
+import CellGrid.Grid;
+
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(10,10);
+    Grid uiGrid = new Grid(20,20);
     public  Ui(){
 
         setTitle("Maze");

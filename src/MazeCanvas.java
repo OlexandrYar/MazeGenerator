@@ -1,3 +1,6 @@
+import CellGrid.Cell;
+import CellGrid.Grid;
+
 import java.awt.*;
 
 public class MazeCanvas extends Canvas{

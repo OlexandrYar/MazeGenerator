@@ -1,9 +1,9 @@
-import java.lang.ref.Cleaner;
+package CellGrid;
 
 public class Cell {
     public boolean isVisited;
-    int row;
-    int column;
+    public int row;
+    public int column;
     public boolean[] walls = new boolean[4];//right,left,top,bottom
 
     public Cell(int row, int column){
