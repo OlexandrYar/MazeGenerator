@@ -2,6 +2,7 @@ import CellGrid.Cell;
 import CellGrid.Grid;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MazeCanvas extends JPanel{
     Grid mazeGrid;
@@ -42,16 +43,16 @@ public class MazeCanvas extends JPanel{
         else{
             cellSize = height/mazeGrid.grid[0].length;
         }
-        if (currentCell!=null){
-            drawDot(g,currentCell);
-        }
         for(int i =0; i< mazeGrid.grid.length; i++){
             for(int j = 0; j<mazeGrid.grid[0].length; j++){
                 drawCell(g,mazeGrid.grid[i][j],i*cellSize,j*cellSize,cellSize);
             }
         }
+        if (currentCell!=null){
+            drawDot(g,currentCell,mazeGrid);
+        }
     }
-    public void drawDot(Graphics g,Cell passedCell){
+    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid){
         int width = getWidth();
         int height = getHeight();
         int cellSize;
@@ -62,11 +63,21 @@ public class MazeCanvas extends JPanel{
         else{
             cellSize = height/mazeGrid.grid[0].length;
         }
-        int dotSize = cellSize/3;
+        int dotSize = cellSize/2;
         int dotX = (passedCell.column*cellSize) + (cellSize/2);
         int dotY = (passedCell.row*cellSize) + (cellSize/2);
         g.setColor(Color.GREEN);
         g.fillOval(dotX - dotSize/2,dotY - dotSize/2,dotSize,dotSize);
+        //Neighouring cells being viewved
+        ArrayList<Cell> neighbours = passedGrid.getAllUnvisitedNeighbours(passedCell);
+        for(Cell neighbour: neighbours){
+            g.setColor(Color.BLUE);
+            int neighDotX = (neighbour.column*cellSize) + (cellSize/2);
+            int neighDotY = (neighbour.row*cellSize) + (cellSize/2);
+            g.fillOval(neighDotX - dotSize/2,neighDotY - dotSize/2,dotSize,dotSize);
+        }
+
+
 
     }
 }

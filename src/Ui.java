@@ -10,7 +10,7 @@ public class Ui extends JFrame {
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
-    int speed = 300;
+    int speed = 500;
 
     public Ui(){
         setTitle("Maze");
