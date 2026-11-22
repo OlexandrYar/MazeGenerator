@@ -34,7 +34,7 @@ public class MazeCanvas extends Canvas{
 
         }
         else{
-            cellSize = height/mazeGrid.grid.length;
+            cellSize = height/mazeGrid.grid[0].length;
         }
         if (currentCell!=null){
             drawDot(g,currentCell);
@@ -54,7 +54,7 @@ public class MazeCanvas extends Canvas{
 
         }
         else{
-            cellSize = height/mazeGrid.grid.length;
+            cellSize = height/mazeGrid.grid[0].length;
         }
         int dotSize = cellSize/3;
         int dotX = (passedCell.column*cellSize) + (cellSize/2);
