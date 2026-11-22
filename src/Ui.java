@@ -6,11 +6,11 @@ import java.util.Stack;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(100,100);
+    Grid uiGrid = new Grid(20,20);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
-    int speed = 0;
+    int speed = 300;
 
     public Ui(){
         setTitle("Maze");

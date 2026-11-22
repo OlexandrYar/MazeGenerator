@@ -1,9 +1,9 @@
 import CellGrid.Cell;
 import CellGrid.Grid;
-
+import javax.swing.JPanel;
 import java.awt.*;
 
-public class MazeCanvas extends Canvas{
+public class MazeCanvas extends JPanel{
     Grid mazeGrid;
     public Cell currentCell = null;
     public MazeCanvas(Grid grid){
@@ -25,7 +25,9 @@ public class MazeCanvas extends Canvas{
 
 
     }
-    public void paint(Graphics g){
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
         int width = getWidth();
         int height = getHeight();
         int cellSize;
