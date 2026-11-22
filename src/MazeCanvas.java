@@ -12,6 +12,7 @@ public class MazeCanvas extends Canvas{
     public void drawCell(Graphics g, Cell c, int top ,int left,int passedCellSize){
         //offset by 1px
         //draw walls
+        g.setColor(Color.BLACK);
         if (c.walls[2])
             g.drawLine(left,top,left+passedCellSize,top);//top
         if (c.walls[0])
@@ -35,14 +36,13 @@ public class MazeCanvas extends Canvas{
         else{
             cellSize = height/mazeGrid.grid.length;
         }
-
+        if (currentCell!=null){
+            drawDot(g,currentCell);
+        }
         for(int i =0; i< mazeGrid.grid.length; i++){
             for(int j = 0; j<mazeGrid.grid[0].length; j++){
                 drawCell(g,mazeGrid.grid[i][j],i*cellSize,j*cellSize,cellSize);
             }
-        }
-        if (currentCell!=null){
-            drawDot(g,currentCell);
         }
     }
     public void drawDot(Graphics g,Cell passedCell){

@@ -6,11 +6,11 @@ import java.util.Stack;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(10,10);
+    Grid uiGrid = new Grid(40,40);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
-    int speed = 150;
+    int speed = 0;
 
     public Ui(){
         setTitle("Maze");
@@ -21,7 +21,7 @@ public class Ui extends JFrame {
     }
     private void generateMaze(){
         Stack<Cell> visited = new Stack<Cell>();
-        current = uiGrid.grid[0][0];
+        current = uiGrid.grid[(int)(Math.random() * (uiGrid.grid.length - 0)) + 0][(int)(Math.random() * (uiGrid.grid[0].length - 0)) + 0];//select random start point
         previous = null;
         current.isVisited = true;
         canvas.currentCell = current;
