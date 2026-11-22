@@ -1,6 +1,7 @@
 import CellGrid.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.swing.*;
@@ -25,7 +26,8 @@ public class Ui extends JFrame {
             if(uiGrid.getAllUnvisitedNeighbours(current).isEmpty()){
                 return;
             }
-            current = uiGrid.getAllUnvisitedNeighbours(current).get(0);
+            ArrayList<Cell> neighbours = uiGrid.getAllUnvisitedNeighbours(current);
+            current = neighbours.get((int) ((Math.random() * (neighbours.size() - 0)) + 0));
             canvas.currentCell = current;
             current.isVisited = true;
             canvas.repaint();
