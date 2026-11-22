@@ -27,6 +27,13 @@ public class Ui extends JFrame {
         visited.push(current);
         Timer timer = new Timer(300,e -> {
             if(uiGrid.getAllUnvisitedNeighbours(current).isEmpty()){
+                visited.pop();
+                if(visited.isEmpty()){
+                    return;
+                }
+                current = visited.peek();
+                canvas.currentCell = current;
+                canvas.repaint();
                 return;
             }
             ArrayList<Cell> neighbours = uiGrid.getAllUnvisitedNeighbours(current);
