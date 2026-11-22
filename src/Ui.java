@@ -19,9 +19,10 @@ public class Ui extends JFrame {
     private void generateMaze(){
         Stack<Cell> visited = new Stack<Cell>();
         current = uiGrid.grid[0][0];
+        current.isVisited = true;
         canvas.currentCell = current;
-        Timer timer = new Timer(30,e -> {
-            if(uiGrid.getAllUnvisitedNeighbours(current) == null){
+        Timer timer = new Timer(300,e -> {
+            if(uiGrid.getAllUnvisitedNeighbours(current).isEmpty()){
                 return;
             }
             current = uiGrid.getAllUnvisitedNeighbours(current).get(0);
@@ -30,7 +31,7 @@ public class Ui extends JFrame {
             canvas.repaint();
 
         });
-
+        timer.start();
 
     }
 
