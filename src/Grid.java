@@ -15,4 +15,29 @@ public class Grid {
         }
     }
 
+    public Cell getLefCell(Cell passedCell){
+        if( passedCell.column - 1 >= 0)
+            return grid[passedCell.row][passedCell.column-1];
+        else
+            return null;
+    }
+    public Cell getRightCell(Cell passedCell){
+        if( passedCell.column + 1 <= grid[0].length)
+            return grid[passedCell.row][passedCell.column+1];
+        else
+            return null;
+    }
+    public Cell getBottomCell(Cell passedCell){
+        if(passedCell.row + 1 <= grid.length)
+            return grid[passedCell.row+1][passedCell.column];
+        else
+            return null;
+    }
+    public Cell getTopCell(Cell passedCell){
+        if(passedCell.row - 1 >= 0)
+            return grid[passedCell.row -1][passedCell.column];
+        else
+            return null;
+    }
+
 }

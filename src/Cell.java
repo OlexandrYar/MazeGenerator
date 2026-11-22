@@ -1,3 +1,5 @@
+import java.lang.ref.Cleaner;
+
 public class Cell {
     public boolean isVisited;
     int row;
