@@ -3,9 +3,11 @@ import CellGrid.Grid;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MazeCanvas extends JPanel{
     Grid mazeGrid;
+    Stack<Cell>backTrack;
     public Cell currentCell = null;
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
@@ -49,10 +51,10 @@ public class MazeCanvas extends JPanel{
             }
         }
         if (currentCell!=null){
-            drawDot(g,currentCell,mazeGrid);
+            drawDot(g,currentCell,mazeGrid,backTrack);
         }
     }
-    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid){
+    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack){
         int width = getWidth();
         int height = getHeight();
         int cellSize;
@@ -75,6 +77,14 @@ public class MazeCanvas extends JPanel{
             int neighDotX = (neighbour.column*cellSize) + (cellSize/2);
             int neighDotY = (neighbour.row*cellSize) + (cellSize/2);
             g.fillOval(neighDotX - dotSize/2,neighDotY - dotSize/2,dotSize,dotSize);
+        }
+        //Backtrack path form Stack
+        int backtrackDotSize = cellSize/4;
+        for (Cell backtrackDot : passedStack){
+            g.setColor(Color.PINK);
+            int neighDotX = (backtrackDot.column*cellSize) + (cellSize/2);
+            int neighDotY = (backtrackDot.row*cellSize) + (cellSize/2);
+            g.fillOval(neighDotX - backtrackDotSize/2,neighDotY - backtrackDotSize/2,backtrackDotSize,backtrackDotSize);
         }
 
 
