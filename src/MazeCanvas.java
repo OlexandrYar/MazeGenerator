@@ -10,7 +10,13 @@ public class MazeCanvas extends JPanel{
         this.mazeGrid = grid;
     }
     public void drawCell(Graphics g, Cell c, int top ,int left,int passedCellSize){
-        //offset by 1px
+        //fill the cell with the corresponding color
+        if(c.isVisited == false){
+            int rectX = (c.column*passedCellSize) + (passedCellSize/2);
+            int recY = (c.row*passedCellSize) + (passedCellSize/2);
+            g.setColor(Color.RED);
+            g.fillRect(rectX - passedCellSize/2,recY - passedCellSize/2,passedCellSize,passedCellSize);
+        }
         //draw walls
         g.setColor(Color.BLACK);
         if (c.walls[2])
@@ -20,9 +26,7 @@ public class MazeCanvas extends JPanel{
         if (c.walls[3])
             g.drawLine(left +passedCellSize, top+passedCellSize,left,top+passedCellSize);//bottom
         if (c.walls[1])
-            g.drawLine(left,top+passedCellSize,left,top);
-
-
+            g.drawLine(left,top+passedCellSize,left,top);//left
 
     }
     @Override
@@ -61,7 +65,7 @@ public class MazeCanvas extends JPanel{
         int dotSize = cellSize/3;
         int dotX = (passedCell.column*cellSize) + (cellSize/2);
         int dotY = (passedCell.row*cellSize) + (cellSize/2);
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         g.fillOval(dotX - dotSize/2,dotY - dotSize/2,dotSize,dotSize);
 
     }
