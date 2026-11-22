@@ -57,8 +57,8 @@ public class MazeCanvas extends Canvas{
             cellSize = height/mazeGrid.grid.length;
         }
         int dotSize = cellSize/3;
-        int dotX = (passedCell.row*cellSize) + (cellSize/2);
-        int dotY = (passedCell.column*cellSize) + (cellSize/2);
+        int dotX = (passedCell.column*cellSize) + (cellSize/2);
+        int dotY = (passedCell.row*cellSize) + (cellSize/2);
         g.setColor(Color.RED);
         g.fillOval(dotX - dotSize/2,dotY - dotSize/2,dotSize,dotSize);
 
