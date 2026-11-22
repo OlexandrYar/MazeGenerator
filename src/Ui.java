@@ -10,6 +10,7 @@ public class Ui extends JFrame {
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
+    int speed = 150;
 
     public Ui(){
         setTitle("Maze");
@@ -25,12 +26,15 @@ public class Ui extends JFrame {
         current.isVisited = true;
         canvas.currentCell = current;
         visited.push(current);
-        Timer timer = new Timer(300,e -> {
+        Timer timer = new Timer(speed,e -> {
             if(uiGrid.getAllUnvisitedNeighbours(current).isEmpty()){
                 visited.pop();
                 if(visited.isEmpty()){
+                    ((Timer)e.getSource()).stop();//gets the timer that caused the event e and stops it
+                    System.out.println("Maze Generated");
                     return;
                 }
+
                 current = visited.peek();
                 canvas.currentCell = current;
                 canvas.repaint();
