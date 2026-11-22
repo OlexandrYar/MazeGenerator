@@ -8,16 +8,17 @@ public class MazeCanvas extends Canvas{
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
     }
-    public void drawCell(Graphics g, Cell c, int top, int left, int passedCellSize){
-        if (c.walls[0])
-            g.drawLine(left+passedCellSize, top,left+passedCellSize, top-passedCellSize);//draw right line
-        if (c.walls[1])
-            g.drawLine(left,top, left,top-passedCellSize);//draw left line
+    public void drawCell(Graphics g, Cell c, int top ,int left,int passedCellSize){
+        //offset by 1px
+        //draw walls
         if (c.walls[2])
-            g.drawLine(left,top, left+passedCellSize, top);//draw top line
+            g.drawLine(left,top,left+passedCellSize,top);//top
+        if (c.walls[0])
+            g.drawLine(left+passedCellSize,top,left+passedCellSize, top+passedCellSize);//right
         if (c.walls[3])
-            g.drawLine(left,top-passedCellSize, left+passedCellSize,top-passedCellSize );//draw bottom line
-
+            g.drawLine(left +passedCellSize, top+passedCellSize,left,top+passedCellSize);//bottom
+        if (c.walls[1])
+            g.drawLine(left,top+passedCellSize,left,top);
 
 
 
@@ -35,7 +36,7 @@ public class MazeCanvas extends Canvas{
         }
 
         for(int i =0; i< mazeGrid.grid.length; i++){
-            for(int j = 0; j<mazeGrid.grid[0].length;j++){
+            for(int j = 0; j<mazeGrid.grid[0].length; j++){
                 drawCell(g,mazeGrid.grid[i][j],i*cellSize,j*cellSize,cellSize);
             }
         }
