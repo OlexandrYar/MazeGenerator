@@ -30,7 +30,7 @@ public class MazeCanvas extends Canvas{
         int height = getHeight();
         int cellSize;
         if (width<height){
-            cellSize = width/mazeGrid.grid.length;
+            cellSize = width/mazeGrid.grid[0].length;
 
         }
         else{
@@ -50,7 +50,7 @@ public class MazeCanvas extends Canvas{
         int height = getHeight();
         int cellSize;
         if (width<height){
-            cellSize = width/mazeGrid.grid.length;
+            cellSize = width/mazeGrid.grid[0].length;
 
         }
         else{
