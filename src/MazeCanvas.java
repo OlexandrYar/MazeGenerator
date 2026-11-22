@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class MazeCanvas extends Canvas{
     Grid mazeGrid;
+    public Cell currentCell = null;
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
     }
@@ -40,5 +41,25 @@ public class MazeCanvas extends Canvas{
                 drawCell(g,mazeGrid.grid[i][j],i*cellSize,j*cellSize,cellSize);
             }
         }
+        if (currentCell!=null){
+            drawDot(g,currentCell);
+        }
+    }
+    public void drawDot(Graphics g,Cell passedCell){
+        int width = getWidth();
+        int height = getHeight();
+        int cellSize;
+        if (width<height){
+            cellSize = width/mazeGrid.grid.length;
+
+        }
+        else{
+            cellSize = height/mazeGrid.grid.length;
+        }
+        int dotX = (passedCell.row*cellSize) + (cellSize/2);
+        int dotY = (passedCell.column*cellSize) + (cellSize/2);
+        g.setColor(Color.RED);
+        g.fillOval(dotX,dotY,30,30);
+
     }
 }
