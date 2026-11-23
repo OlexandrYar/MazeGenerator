@@ -1,16 +1,17 @@
 import CellGrid.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(10,12);
+    Grid uiGrid = new Grid(20,20);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
-    int speed = 0;
+    Cell initialPoint = uiGrid.grid[generateRandomPoint()][generateRandomPoint()];//select random start point
+    Cell targetPoint;//select random finish point
+    int generationSpeed = 0;
 
     public Ui(){
         setTitle("Maze");
@@ -20,14 +21,20 @@ public class Ui extends JFrame {
         generateMaze();
     }
     private void generateMaze(){
+        //just to make shure end point is never the same as start point
+        do{
+            targetPoint = uiGrid.grid[generateRandomPoint()][generateRandomPoint()];
+        }while(targetPoint == initialPoint);
+        canvas.start = initialPoint;
+        canvas.end = targetPoint;
         Stack<Cell> visited = new Stack<Cell>();
         canvas.backTrack = visited;
-        current = uiGrid.grid[(int)(Math.random() * (uiGrid.grid.length - 0)) + 0][(int)(Math.random() * (uiGrid.grid[0].length - 0)) + 0];//select random start point
+        current = initialPoint;
         previous = null;
         current.isVisited = true;
         canvas.currentCell = current;
         visited.push(current);
-        Timer timer = new Timer(speed,e -> {
+        Timer timer = new Timer(generationSpeed, e -> {
             if(uiGrid.getAllUnvisitedNeighbours(current).isEmpty()){
                 visited.pop();
                 if(visited.isEmpty()){
@@ -78,6 +85,15 @@ public class Ui extends JFrame {
             passedCurrent.walls[2] = false;
         }
 
+    }
+
+    private void solveMaze(){
+
+    }
+
+    public int generateRandomPoint(){
+        int randomPoint = (int)(Math.random() * (uiGrid.grid.length - 0)) + 0;
+        return randomPoint;
     }
     public static void main(String[] args){
         new Ui().setVisible(true);

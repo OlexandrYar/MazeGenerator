@@ -8,6 +8,8 @@ import java.util.Stack;
 public class MazeCanvas extends JPanel{
     Grid mazeGrid;
     Stack<Cell>backTrack;
+    Cell start;
+    Cell end;
     public Cell currentCell = null;
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
@@ -18,7 +20,7 @@ public class MazeCanvas extends JPanel{
             int rectX = (c.column*passedCellSize) + (passedCellSize/2);
             int recY = (c.row*passedCellSize) + (passedCellSize/2);
             g.setColor(Color.RED);
-            g.fillRect(rectX - passedCellSize/2,recY - passedCellSize/2,passedCellSize,passedCellSize);
+            g.fillRect(left,top,passedCellSize,passedCellSize);
         }
         //draw walls
         g.setColor(Color.BLACK);
@@ -51,10 +53,10 @@ public class MazeCanvas extends JPanel{
             }
         }
         if (currentCell!=null){
-            drawDot(g,currentCell,mazeGrid,backTrack);
+            drawDot(g,currentCell,mazeGrid,backTrack,start,end);
         }
     }
-    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack){
+    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack,Cell startPoint, Cell endPoint){
         int width = getWidth();
         int height = getHeight();
         int cellSize;
@@ -86,8 +88,16 @@ public class MazeCanvas extends JPanel{
             int neighDotY = (backtrackDot.row*cellSize) + (cellSize/2);
             g.fillOval(neighDotX - backtrackDotSize/2,neighDotY - backtrackDotSize/2,backtrackDotSize,backtrackDotSize);
         }
-
-
+        //draw start point
+        g.setColor(Color.GRAY);
+        int startX = (startPoint.column*cellSize) + (cellSize/2);
+        int startY = (startPoint.row*cellSize) + (cellSize/2);
+        g.fillOval(startX - dotSize/2, startY - dotSize/2 , dotSize,dotSize);
+        //draw end point
+        g.setColor(Color.CYAN);
+        int endX = (endPoint.column*cellSize) + (cellSize/2);
+        int endY = (endPoint.row*cellSize) + (cellSize/2);
+        g.fillOval(endX - dotSize/2, endY - dotSize/2 , dotSize,dotSize);
 
     }
 }
