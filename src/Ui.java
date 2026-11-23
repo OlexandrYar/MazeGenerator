@@ -14,7 +14,7 @@ public class Ui extends JFrame {
     Cell initialPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];//select random start point
     Cell targetPoint;//select random finish point
     int generationSpeed = 0;
-    int solvingSpeed = 300;
+    int solvingSpeed = 20;
 
     public Ui(){
         setTitle("Maze");
@@ -110,8 +110,19 @@ public class Ui extends JFrame {
             current = traversalQueue.poll();
             canvas.currentCell = current;
             if(current == targetPoint){
-                ((Timer)e.getSource()).stop();//gets the timer that caused the event e and stops it
+                //gets the timer that caused the event e and stops it
+
+                ArrayList<Cell> pathway = new ArrayList<Cell>();
+                Cell step = targetPoint;
+                while (step != null){
+                    pathway.add(step);
+                    step = step.parent;
+                    canvas.currentCell = step;
+                    canvas.repaint();
+                }
+                canvas.path = pathway;
                 canvas.repaint();
+                ((Timer)e.getSource()).stop();
                 return;
             }
 
@@ -122,6 +133,7 @@ public class Ui extends JFrame {
             }
             canvas.repaint();
         });
+        timer.start();
     }
 
     public int generateRandomPoint(boolean forRows){

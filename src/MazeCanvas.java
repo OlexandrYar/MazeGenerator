@@ -11,6 +11,7 @@ public class MazeCanvas extends JPanel{
     Cell start;
     Cell end;
     Boolean isGenerate = true;//track if this is generate or solve stage
+    ArrayList<Cell> path = null;
     public Cell currentCell = null;
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
@@ -53,10 +54,10 @@ public class MazeCanvas extends JPanel{
             }
         }
         if (currentCell!=null){
-            drawDot(g,currentCell,mazeGrid,backTrack,start,end);
+            drawDot(g,currentCell,mazeGrid,backTrack,start,end,path);
         }
     }
-    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack,Cell startPoint, Cell endPoint){
+    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack,Cell startPoint, Cell endPoint, ArrayList<Cell> passedPath){
         int width = getWidth()/mazeGrid.grid[0].length;
         int height = getHeight()/mazeGrid.grid.length;
         int cellSize;
@@ -102,6 +103,15 @@ public class MazeCanvas extends JPanel{
         int endX = (endPoint.column*cellSize) + (cellSize/2);
         int endY = (endPoint.row*cellSize) + (cellSize/2);
         g.fillOval(endX - dotSize/2, endY - dotSize/2 , dotSize,dotSize);
+
+        //draw a shortest path
+        if(passedPath != null){
+            for(Cell pathCell : passedPath){
+                int pathX = (passedCell.column*cellSize) + (cellSize/2);
+                int pathY = (passedCell.row*cellSize) + (cellSize/2);
+                g.fillOval(pathX - dotSize/2, pathY - dotSize/2 , dotSize,dotSize);
+            }
+        }
 
     }
 }
