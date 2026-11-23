@@ -3,11 +3,10 @@ import CellGrid.Grid;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class MazeCanvas extends JPanel{
     Grid mazeGrid;
-    Stack<Cell>backTrack;
+    ArrayList<Cell> backTrack;
     Cell start;
     Cell end;
     Boolean isGenerate = true;//track if this is generate or solve stage
@@ -57,7 +56,7 @@ public class MazeCanvas extends JPanel{
             drawDot(g,currentCell,mazeGrid,backTrack,start,end,path);
         }
     }
-    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack,Cell startPoint, Cell endPoint, ArrayList<Cell> passedPath){
+    public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, ArrayList<Cell> passedStack,Cell startPoint, Cell endPoint, ArrayList<Cell> passedPath){
         int width = getWidth()/mazeGrid.grid[0].length;
         int height = getHeight()/mazeGrid.grid.length;
         int cellSize;
