@@ -13,8 +13,8 @@ public class Ui extends JFrame {
     Cell previous;
     Cell initialPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];//select random start point
     Cell targetPoint;//select random finish point
-    int generationSpeed = 0;
-    int solvingSpeed = 20;
+    int generationSpeed = 150;
+    int solvingSpeed = 150;
 
     public Ui(){
         setTitle("Maze");
