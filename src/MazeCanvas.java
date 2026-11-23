@@ -37,15 +37,14 @@ public class MazeCanvas extends JPanel{
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        int width = getWidth();
-        int height = getHeight();
+        int width = getWidth()/mazeGrid.grid[0].length;
+        int height = getHeight()/mazeGrid.grid.length;
         int cellSize;
         if (width<height){
-            cellSize = width/mazeGrid.grid[0].length;
-
+            cellSize = width;
         }
-        else{
-            cellSize = height/mazeGrid.grid[0].length;
+        else {
+            cellSize = height;
         }
         for(int i =0; i< mazeGrid.grid.length; i++){
             for(int j = 0; j<mazeGrid.grid[0].length; j++){
@@ -57,15 +56,14 @@ public class MazeCanvas extends JPanel{
         }
     }
     public void drawDot(Graphics g,Cell passedCell,Grid passedGrid, Stack<Cell> passedStack,Cell startPoint, Cell endPoint){
-        int width = getWidth();
-        int height = getHeight();
+        int width = getWidth()/mazeGrid.grid[0].length;
+        int height = getHeight()/mazeGrid.grid.length;
         int cellSize;
         if (width<height){
-            cellSize = width/mazeGrid.grid[0].length;
-
+            cellSize = width;
         }
-        else{
-            cellSize = height/mazeGrid.grid[0].length;
+        else {
+            cellSize = height;
         }
         int dotSize = cellSize/2;
         int dotX = (passedCell.column*cellSize) + (cellSize/2);

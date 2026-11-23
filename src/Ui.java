@@ -5,11 +5,11 @@ import java.util.Stack;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(20,20);
+    Grid uiGrid = new Grid(13,122);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
-    Cell initialPoint = uiGrid.grid[generateRandomPoint()][generateRandomPoint()];//select random start point
+    Cell initialPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];//select random start point
     Cell targetPoint;//select random finish point
     int generationSpeed = 0;
 
@@ -23,7 +23,7 @@ public class Ui extends JFrame {
     private void generateMaze(){
         //just to make shure end point is never the same as start point
         do{
-            targetPoint = uiGrid.grid[generateRandomPoint()][generateRandomPoint()];
+            targetPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];
         }while(targetPoint == initialPoint);
         canvas.start = initialPoint;
         canvas.end = targetPoint;
@@ -91,9 +91,16 @@ public class Ui extends JFrame {
 
     }
 
-    public int generateRandomPoint(){
-        int randomPoint = (int)(Math.random() * (uiGrid.grid.length - 0)) + 0;
-        return randomPoint;
+    public int generateRandomPoint(boolean forRows){
+        if(forRows){
+            int randomPoint = (int)(Math.random() * (uiGrid.grid.length - 0)) + 0;
+            return randomPoint;
+        }
+        else {
+            int randomPoint = (int)(Math.random() * (uiGrid.grid[0].length - 0)) + 0;
+            return randomPoint;
+        }
+
     }
     public static void main(String[] args){
         new Ui().setVisible(true);
