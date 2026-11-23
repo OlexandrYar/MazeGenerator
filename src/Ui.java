@@ -2,16 +2,19 @@ import CellGrid.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.ArrayDeque;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(20,30);
+    Grid uiGrid = new Grid(20,20);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
     Cell initialPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];//select random start point
     Cell targetPoint;//select random finish point
-    int generationSpeed = 0;
+    int generationSpeed = 1500;
+    int solvingSpeed = 300;
 
     public Ui(){
         setTitle("Maze");
@@ -89,9 +92,23 @@ public class Ui extends JFrame {
     }
 
     private void solveMaze(){
+        Queue<Cell> traversalQueue = new ArrayDeque<Cell>();
+
         uiGrid.setAllUnvisited();
         canvas.isGenerate = false;
+        current = initialPoint;
+        canvas.currentCell = current;
+        current.isVisited =true;
+        traversalQueue.offer(current);
         canvas.repaint();
+        Timer timer = new Timer(solvingSpeed, e -> {
+            if(traversalQueue.isEmpty()){
+                ((Timer)e.getSource()).stop();//gets the timer that caused the event e and stops it
+                System.out.println("Maze traversed");
+                return;
+            }
+            
+        });
     }
 
     public int generateRandomPoint(boolean forRows){
