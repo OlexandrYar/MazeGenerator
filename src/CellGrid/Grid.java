@@ -17,6 +17,15 @@ public class Grid {
         }
     }
 
+    public void setAllUnvisited(){
+        for(int i = 0; i< grid.length; i++){
+            for(int j = 0; j<grid[0].length;j++){
+                grid[i][j].isVisited = false;
+            }
+        }
+
+    }
+
     public Cell getLefCell(Cell passedCell){
         if( passedCell.column - 1 >= 0)
             return grid[passedCell.row][passedCell.column-1];
@@ -42,14 +51,27 @@ public class Grid {
             return null;
     }
     public ArrayList<Cell> getAllUnvisitedNeighbours(Cell passedCell){
-        ArrayList<Cell> avalilavle = new ArrayList<Cell>();
+        ArrayList<Cell> available = new ArrayList<Cell>();
         if (getRightCell(passedCell) != null && getRightCell(passedCell).isVisited == false)
-            avalilavle.add(getRightCell(passedCell));
+            available.add(getRightCell(passedCell));
         if (getLefCell(passedCell) != null && getLefCell(passedCell).isVisited == false)
-            avalilavle.add(getLefCell(passedCell));
+            available.add(getLefCell(passedCell));
         if (getTopCell(passedCell) != null && getTopCell(passedCell).isVisited == false)
-            avalilavle.add(getTopCell(passedCell));
+            available.add(getTopCell(passedCell));
         if (getBottomCell(passedCell) != null && getBottomCell(passedCell).isVisited == false)
+            available.add(getBottomCell(passedCell));
+        return available;
+    }
+    // same check as in getAllUnvisitedNeighbours + check if the neighbor cell has wall
+    public ArrayList<Cell> getAllNoWalls(Cell passedCell){
+        ArrayList<Cell> avalilavle = new ArrayList<Cell>();
+        if (getRightCell(passedCell) != null && getRightCell(passedCell).isVisited == false && getRightCell(passedCell).walls[1] == false)
+            avalilavle.add(getRightCell(passedCell));
+        if (getLefCell(passedCell) != null && getLefCell(passedCell).isVisited == false && getLefCell(passedCell).walls[0] == false)
+            avalilavle.add(getLefCell(passedCell));
+        if (getTopCell(passedCell) != null && getTopCell(passedCell).isVisited == false && getTopCell(passedCell).walls[3] == false)
+            avalilavle.add(getTopCell(passedCell));
+        if (getBottomCell(passedCell) != null && getBottomCell(passedCell).isVisited == false && getBottomCell(passedCell).walls[2] == false)
             avalilavle.add(getBottomCell(passedCell));
         return avalilavle;
     }

@@ -10,6 +10,7 @@ public class MazeCanvas extends JPanel{
     Stack<Cell>backTrack;
     Cell start;
     Cell end;
+    Boolean isGenerate = true;//track if this is generate or solve stage
     public Cell currentCell = null;
     public MazeCanvas(Grid grid){
         this.mazeGrid = grid;
@@ -71,7 +72,12 @@ public class MazeCanvas extends JPanel{
         g.setColor(Color.GREEN);
         g.fillOval(dotX - dotSize/2,dotY - dotSize/2,dotSize,dotSize);
         //Neighouring cells being viewved
-        ArrayList<Cell> neighbours = passedGrid.getAllUnvisitedNeighbours(passedCell);
+        ArrayList<Cell> neighbours;
+        if(isGenerate)
+            neighbours = passedGrid.getAllUnvisitedNeighbours(passedCell);
+        else
+            neighbours = passedGrid.getAllNoWalls(passedCell);
+
         for(Cell neighbour: neighbours){
             g.setColor(Color.BLUE);
             int neighDotX = (neighbour.column*cellSize) + (cellSize/2);

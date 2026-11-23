@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import javax.swing.*;
 public class Ui extends JFrame {
-    Grid uiGrid = new Grid(13,122);
+    Grid uiGrid = new Grid(20,30);
     MazeCanvas canvas = new MazeCanvas(uiGrid);
     Cell current;
     Cell previous;
@@ -19,6 +19,7 @@ public class Ui extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(canvas);
         generateMaze();
+
     }
     private void generateMaze(){
         //just to make shure end point is never the same as start point
@@ -39,7 +40,7 @@ public class Ui extends JFrame {
                 visited.pop();
                 if(visited.isEmpty()){
                     ((Timer)e.getSource()).stop();//gets the timer that caused the event e and stops it
-                    System.out.println("Maze Generated");
+                    solveMaze();
                     return;
                 }
 
@@ -88,7 +89,9 @@ public class Ui extends JFrame {
     }
 
     private void solveMaze(){
-
+        uiGrid.setAllUnvisited();
+        canvas.isGenerate = false;
+        canvas.repaint();
     }
 
     public int generateRandomPoint(boolean forRows){
