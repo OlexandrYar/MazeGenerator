@@ -13,7 +13,7 @@ public class Ui extends JFrame {
     Cell previous;
     Cell initialPoint = uiGrid.grid[generateRandomPoint(true)][generateRandomPoint(false)];//select random start point
     Cell targetPoint;//select random finish point
-    int generationSpeed = 1500;
+    int generationSpeed = 0;
     int solvingSpeed = 300;
 
     public Ui(){
@@ -107,7 +107,20 @@ public class Ui extends JFrame {
                 System.out.println("Maze traversed");
                 return;
             }
-            
+            current = traversalQueue.poll();
+            canvas.currentCell = current;
+            if(current == targetPoint){
+                ((Timer)e.getSource()).stop();//gets the timer that caused the event e and stops it
+                canvas.repaint();
+                return;
+            }
+
+            for(Cell neighbour: uiGrid.getAllNoWalls(current)){
+                neighbour.isVisited = true;
+                neighbour.parent = current;
+                traversalQueue.offer(neighbour);
+            }
+            canvas.repaint();
         });
     }
 
