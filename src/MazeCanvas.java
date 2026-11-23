@@ -106,9 +106,10 @@ public class MazeCanvas extends JPanel{
 
         //draw a shortest path
         if(passedPath != null){
+            g.setColor(Color.PINK);
             for(Cell pathCell : passedPath){
-                int pathX = (passedCell.column*cellSize) + (cellSize/2);
-                int pathY = (passedCell.row*cellSize) + (cellSize/2);
+                int pathX = (pathCell.column*cellSize) + (cellSize/2);
+                int pathY = (pathCell.row*cellSize) + (cellSize/2);
                 g.fillOval(pathX - dotSize/2, pathY - dotSize/2 , dotSize,dotSize);
             }
         }

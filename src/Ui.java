@@ -117,8 +117,6 @@ public class Ui extends JFrame {
                 while (step != null){
                     pathway.add(step);
                     step = step.parent;
-                    canvas.currentCell = step;
-                    canvas.repaint();
                 }
                 canvas.path = pathway;
                 canvas.repaint();
