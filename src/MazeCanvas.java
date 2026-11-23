@@ -110,7 +110,7 @@ public class MazeCanvas extends JPanel{
             for(Cell pathCell : passedPath){
                 int pathX = (pathCell.column*cellSize) + (cellSize/2);
                 int pathY = (pathCell.row*cellSize) + (cellSize/2);
-                g.fillOval(pathX - dotSize/2, pathY - dotSize/2 , dotSize,dotSize);
+                g.fillOval(pathX - backtrackDotSize/2, pathY - backtrackDotSize/2 , backtrackDotSize,backtrackDotSize);
             }
         }
 
