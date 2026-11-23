@@ -1,6 +1,6 @@
 package Queue;
 public class QueueArrayBased implements QueueInterface {
-  private final int MAX_QUEUE = 50; // maximum size of queue
+  private final int MAX_QUEUE = 1000; // maximum size of queue
   private Object[] items;
   private int front, back, count;
   
